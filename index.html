@@ -26,11 +26,16 @@
                 <label for="resena" class="block text-gray-700 font-bold mb-2">Reseña</label>
                 <textarea id="resena" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="4" required></textarea>
             </div>
+            <div class="mb-4">
+                <label for="posterUrl" class="block text-gray-700 font-bold mb-2">URL del poster (imagen)</label>
+                <input type="url" id="posterUrl" placeholder="https://ejemplo.com/poster.jpg" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Guardar</button>
         </form>
         <table class="min-w-full bg-white">
             <thead>
                 <tr>
+                    <th class="py-2 px-4 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Poster</th>
                     <th class="py-2 px-4 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Título</th>
                     <th class="py-2 px-4 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Año</th>
                     <th class="py-2 px-4 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Calificación</th>
@@ -52,12 +57,18 @@
             const anio = document.getElementById('anio').value;
             const calificacion = document.getElementById('calificacion').value;
             const resena = document.getElementById('resena').value;
+            const posterUrl = document.getElementById('posterUrl').value;
 
             // Crear una nueva fila en la tabla
             const nuevaFila = document.createElement('tr');
 
-            // Añadir celdas a la fila
+            // Añadir celdas a la fila, incluyendo la imagen si se proporcionó
+            const posterCell = posterUrl && posterUrl.trim() !== ''
+                ? `<td class="py-2 px-4 border-b border-gray-300"><img src="${posterUrl}" alt="Poster de ${titulo}" class="w-24 h-32 object-cover rounded"></td>`
+                : `<td class="py-2 px-4 border-b border-gray-300 text-sm text-gray-500">N/D</td>`;
+
             nuevaFila.innerHTML = `
+                ${posterCell}
                 <td class="py-2 px-4 border-b border-gray-300">${titulo}</td>
                 <td class="py-2 px-4 border-b border-gray-300">${anio}</td>
                 <td class="py-2 px-4 border-b border-gray-300">${calificacion}</td>
